@@ -1,18 +1,85 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'edu.sc.seis.launch4j' version '2.4.9'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'distribution'
 }
 
 group 'org.pafdownloader'
 version '3.0'
 
+
+mainClassName = "scraping.Scraper"
+
+
+
+
+distributions {
+    custom {
+        distributionBaseName = 'PAFDownloader'
+        contents{
+            from(
+                    "${buildDir}/launch4j/PAFDownloader.exe",
+                    "${projectDir}/jre"
+            )
+        }
+    }
+}
+assembleCustomDist{
+    dependsOn(tasks.createExe)
+}
+
 repositories {
     mavenCentral()
 }
+run {
+    standardInput = System.in
+}
+
+application {
+    mainClass = mainClassName
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "org.pafdownloader.scraping.Scraper"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+launch4j {
+    outfile = 'PAFDownloader.exe'
+    mainClassName = project.mainClassName
+    copyConfigurable = []
+    headerType = 'console'
+    jdkPreference = 'jdkOnly'
+    jreMinVersion = '11.0.0'
+    bundledJrePath = 'jre'
+    bundledJre64Bit = true
+    bundledJreAsFallback = true
+    icon = "${projectDir}/icons/icon.ico"
+    jar = "${buildDir}/libs/${project.tasks.shadowJar.getArchiveFileName().get()}"
+}
 
 dependencies {
+	implementation(
+		'com.opencsv:opencsv:5.3',
+		'me.tongfei:progressbar:0.9.0',
+		'net.sourceforge.htmlunit:htmlunit:2.47.1'
+	)
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
+
 
 test {
     useJUnitPlatform()
