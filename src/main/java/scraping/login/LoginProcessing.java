@@ -1,8 +1,8 @@
 package scraping.login;
 
-import Utils.Utils;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.*;
+import utils.Utils;
 
 import java.io.IOException;
 import java.util.Scanner;

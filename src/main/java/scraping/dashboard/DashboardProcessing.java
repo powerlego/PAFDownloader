@@ -1,17 +1,17 @@
 package scraping.dashboard;
 
-import containers.Employees;
-import containers.PAF;
-import Utils.Utils;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.UnexpectedPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.*;
+import containers.Employees;
+import containers.PAF;
 import me.tongfei.progressbar.ProgressBar;
 import me.tongfei.progressbar.ProgressBarBuilder;
 import me.tongfei.progressbar.ProgressBarStyle;
 import org.apache.commons.io.IOUtils;
+import utils.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;

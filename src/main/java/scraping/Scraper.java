@@ -1,12 +1,12 @@
 package scraping;
 
-import containers.Employees;
-import scraping.dashboard.DashboardProcessing;
-import scraping.login.LoginProcessing;
-import Utils.Utils;
 import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.SilentJavaScriptErrorListener;
+import containers.Employees;
+import scraping.dashboard.DashboardProcessing;
+import scraping.login.LoginProcessing;
+import utils.Utils;
 
 import java.io.IOException;
 import java.nio.file.Files;
