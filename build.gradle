@@ -4,6 +4,7 @@ plugins {
     id 'edu.sc.seis.launch4j' version '2.4.9'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
     id 'distribution'
+
 }
 
 group 'org.pafdownloader'
@@ -11,9 +12,6 @@ version '3.0'
 
 
 mainClassName = "scraping.Scraper"
-
-
-
 
 distributions {
     custom {
@@ -26,8 +24,25 @@ distributions {
         }
     }
 }
+
 assembleCustomDist{
     dependsOn(tasks.createExe)
+}
+
+customDistTar{
+    dependsOn(tasks.createExe)
+}
+
+customDistTar.configure {
+    mustRunAfter(distTar)
+}
+
+customDistZip{
+    dependsOn(tasks.createExe)
+}
+
+customDistZip.configure {
+    mustRunAfter(distZip)
 }
 
 repositories {
