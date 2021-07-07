@@ -1,17 +1,17 @@
-package scraping.dashboard;
+package org.pafdownloader.scraping.dashboard;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.UnexpectedPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.*;
-import containers.Employees;
-import containers.PAF;
 import me.tongfei.progressbar.ProgressBar;
 import me.tongfei.progressbar.ProgressBarBuilder;
 import me.tongfei.progressbar.ProgressBarStyle;
 import org.apache.commons.io.IOUtils;
-import utils.Utils;
+import org.pafdownloader.containers.Employees;
+import org.pafdownloader.containers.PAF;
+import org.pafdownloader.utils.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -292,7 +292,7 @@ public class DashboardProcessing {
         } else {
             List<File> supportingDocs = new LinkedList<>();
             //Creates a supporting documents folder inside the employee's folder
-            Path supportDocs = employeeFolder.resolve("supporting_docs/");
+            Path supportDocs = employeeFolder.resolve("pafs/" + transactionID + "/supporting_docs/");
             Files.createDirectories(supportDocs);
             //Iterates through all of the elements containing the supporting documents
             for (HtmlAnchor downloadAnchor : elements) {
@@ -328,7 +328,7 @@ public class DashboardProcessing {
      */
     private void writePAFCSV(List<List<String>> tableTop, List<List<String>> tableMiddle, Path employeeFolder, int transactionID) throws IOException {
         //Creates a folder for the PAFs if it does not exist
-        Path pafFolder = employeeFolder.resolve("pafs/");
+        Path pafFolder = employeeFolder.resolve("pafs/" + transactionID + "/");
         Files.createDirectories(pafFolder);
         Path pafFile = pafFolder.resolve(transactionID + ".csv");
         utils.writeCSV(pafFile, tableTop, tableMiddle);

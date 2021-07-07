@@ -4,11 +4,11 @@ plugins {
     id 'edu.sc.seis.launch4j' version '2.4.9'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
     id 'distribution'
-
+    id 'maven'
 }
 
 group 'org.pafdownloader'
-version '3.0'
+version '3.0.0'
 
 
 mainClassName = "scraping.Scraper"

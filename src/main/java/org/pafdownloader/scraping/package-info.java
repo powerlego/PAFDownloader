@@ -1,4 +1,4 @@
 /**
  * The main scraping package
  */
-package scraping;
+package org.pafdownloader.scraping;

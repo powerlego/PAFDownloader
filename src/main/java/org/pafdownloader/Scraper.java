@@ -1,12 +1,12 @@
-package scraping;
+package org.pafdownloader;
 
 import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.SilentJavaScriptErrorListener;
-import containers.Employees;
-import scraping.dashboard.DashboardProcessing;
-import scraping.login.LoginProcessing;
-import utils.Utils;
+import org.pafdownloader.containers.Employees;
+import org.pafdownloader.scraping.dashboard.DashboardProcessing;
+import org.pafdownloader.scraping.login.LoginProcessing;
+import org.pafdownloader.utils.Utils;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -59,7 +59,7 @@ public class Scraper {
         LoginProcessing loginProcessing = new LoginProcessing();
         DashboardProcessing dashboardProcessing = new DashboardProcessing();
         //Hardcoded path to save the processed PAFs
-        Path output = Paths.get("C:/HR/Paycom Data Scrape/PAFs/employees");
+        Path output = Paths.get("Y:/Paycom Data Scrape/PAFs/employees");
         if (output.toFile().exists()) {
             utils.deleteDirectory(output.toFile());
         }

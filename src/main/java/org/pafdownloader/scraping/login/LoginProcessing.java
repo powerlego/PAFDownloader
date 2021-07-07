@@ -1,8 +1,14 @@
-package scraping.login;
+package org.pafdownloader.scraping.login;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.*;
-import utils.Utils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.pafdownloader.utils.SeleniumUtils;
+import org.pafdownloader.utils.Utils;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -21,9 +27,45 @@ public class LoginProcessing {
     private final Utils utils = new Utils();
 
     /**
+     * The instance of the logger
+     */
+    private static final Logger logger = LogManager.getLogger(LoginProcessing.class);
+
+    /**
      * Constructor for class
      */
     public LoginProcessing() {
+    }
+
+
+    public static void login(WebDriver driver, Scanner scanner) {
+        System.out.println("Please enter your client code: ");
+        String clientCode = scanner.nextLine();
+        System.out.println("Please enter your username: ");
+        String userName = scanner.nextLine();
+        System.out.println("Please enter your password: ");
+        String pwd = scanner.nextLine();
+        driver.findElement(By.id("clientcode")).sendKeys(clientCode);
+        driver.findElement(By.id("txtlogin")).sendKeys(userName);
+        driver.findElement(By.id("password")).sendKeys(pwd);
+        driver.findElement(By.id("btnSubmit")).click();
+        SeleniumUtils.waitForLoad(driver);
+        System.out.println(driver.findElement(By.xpath("//*[@id=\"firstSecurityQuestion-row\"]/label")).getText());
+        String firstQ = scanner.nextLine();
+        driver.findElement(By.xpath("//*[@id=\"firstSecurityQuestion-row\"]/div/div/input")).sendKeys(firstQ);
+        System.out.println(driver.findElement(By.xpath("//*[@id=\"secondSecurityQuestion-row\"]/label")).getText());
+        String secQ = scanner.nextLine();
+        driver.findElement(By.xpath("//*[@id=\"secondSecurityQuestion-row\"]/div/div/input")).sendKeys(secQ);
+        driver.findElement(By.xpath("//button[@name='continue']")).click();
+        SeleniumUtils.waitForLoad(driver);
+        try {
+            driver.findElement(By.id("TalentManagement"));
+        }
+        catch (NoSuchElementException e) {
+            logger.fatal("Wrong answers to your questions", e);
+            driver.close();
+            System.exit(1);
+        }
     }
 
     /**

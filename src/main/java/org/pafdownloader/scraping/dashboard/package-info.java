@@ -1,4 +1,4 @@
 /**
  * The package containing the dashboard scraper
  */
-package scraping.dashboard;
+package org.pafdownloader.scraping.dashboard;

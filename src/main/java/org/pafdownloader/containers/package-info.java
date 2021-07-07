@@ -1,4 +1,4 @@
 /**
  * The containers that hold the processed data
  */
-package containers;
+package org.pafdownloader.containers;

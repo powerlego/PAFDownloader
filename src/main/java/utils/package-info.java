@@ -1,4 +1,0 @@
-/**
- * Utility package
- */
-package utils;

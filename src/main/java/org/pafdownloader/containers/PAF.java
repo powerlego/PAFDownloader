@@ -1,4 +1,4 @@
-package containers;
+package org.pafdownloader.containers;
 
 import java.io.File;
 import java.util.List;

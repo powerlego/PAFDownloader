@@ -1,4 +1,4 @@
-package utils;
+package org.pafdownloader.utils;
 
 import com.opencsv.CSVWriter;
 
